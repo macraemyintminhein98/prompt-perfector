@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Perfector</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Prompt Perfector</h1>
+        <p class="text-center text-gray-600 mb-8">Refine your AI prompts for superior results.</p>
+
+        <form id="promptForm" class="space-y-4">
+            <div>
+                <label for="rawPrompt" class="block text-sm font-medium text-gray-700">Your Rough Prompt Idea:</label>
+                <textarea id="rawPrompt" rows="5" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., 'write a blog about AI'" required></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="tone" class="block text-sm font-medium text-gray-700">Tone (Optional):</label>
+                    <input type="text" id="tone" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm" placeholder="e.g., 'professional', 'humorous'">
+                </div>
+                <div>
+                    <label for="format" class="block text-sm font-medium text-gray-700">Format (Optional):</label>
+                    <input type="text" id="format" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm" placeholder="e.g., 'listicle', 'code snippet'">
+                </div>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Perfect My Prompt</button>
+        </form>
+
+        <div id="perfectedPromptContainer" class="mt-8 hidden">
+            <h2 class="text-xl font-semibold text-gray-800 mb-3">Perfected Prompt:</h2>
+            <div id="perfectedPrompt" class="bg-gray-50 p-4 rounded-md border border-gray-200 text-gray-800 whitespace-pre-wrap"></div>
+            <button id="checkoutButton" class="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Get Access - $9.99</button>
+        </div>
+
+        <p class="text-center text-xs text-gray-500 mt-8">Early Access Product</p>
+    </div>
+    
+    <script>
+        document.getElementById('promptForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            document.getElementById('perfectedPrompt').innerText = 'Generating...';
+            document.getElementById('perfectedPromptContainer').classList.remove('hidden');
+
+            // In a real application, this would call a backend API.
+            // For this minimal example, we'll simulate a response.
+            setTimeout(() => {
+                const rawPrompt = document.getElementById('rawPrompt').value;
+                const tone = document.getElementById('tone').value;
+                const format = document.getElementById('format').value;
+                
+                let refinedPrompt = `**Objective:** Create a comprehensive response based on the following task.\n\n**Initial Idea:** ${rawPrompt}\n\n`;
+                if (tone) refinedPrompt += `**Desired Tone:** ${tone}.\n`;
+                if (format) refinedPrompt += `**Output Format:** ${format}.\n`;
+                refinedPrompt += `\n**Key Considerations:**\n- Ensure clarity and conciseness.\n- Provide actionable insights if applicable.\n- Structure the response logically.\n- Consider target audience and deliver appropriate depth.\n\n**Deliverable:** A highly detailed and optimized prompt that fulfills the above requirements, ready for advanced AI models.`;
+
+                document.getElementById('perfectedPrompt').innerText = refinedPrompt;
+            }, 1500);
+        });
+
+        document.getElementById('checkoutButton').addEventListener('click', () => {
+            alert('Integration with Stripe Checkout would go here! (Price: $9.99)');
+            // In a real app: Redirect to Stripe Checkout or open a modal
+            // window.location.href = 'YOUR_STRIPE_CHECKOUT_URL';
+        });
+    </script>
+</body>
+</html>
